@@ -1,0 +1,19 @@
+# week2-data-work
+initgit
+add
+README.mdgit
+commit
+-m
+first commit
+git
+branch
+-M
+maingit
+remote
+add
+origin
+https://github.com/sausan1414-sketch/week2-data-work.gitgit
+push
+-u
+origin
+ImportWarning
