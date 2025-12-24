@@ -1,0 +1,11 @@
+{
+  "timestamp_utc": "2025-12-24T16:34:35.055220+00:00",
+  "rows": {
+    "orders": 5,
+    "users": 4
+  },
+  "outputs": {
+    "orders": "C:\\Users\\lamia\\Downloads\\sdaia\\week2-data-work\\data\\processed\\orders.parquet",
+    "users": "C:\\Users\\lamia\\Downloads\\sdaia\\week2-data-work\\data\\processed\\users.parquet"
+  }
+}

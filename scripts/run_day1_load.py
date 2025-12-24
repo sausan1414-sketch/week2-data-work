@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 import logging
 
 
-ROOT = Path(_file_).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
@@ -14,8 +14,7 @@ from bootcamp_data.config import make_paths
 from bootcamp_data.io import read_orders_csv, read_users_csv, write_parquet
 from bootcamp_data.transforms import enforce_schema
 
-log = logging.getLogger(_name_)
-
+log = logging.getLogger(__name__)
 
 def main() -> None:
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
@@ -30,7 +29,7 @@ def main() -> None:
 
     out_orders = p.processed / "orders.parquet"
     out_users = p.processed / "users.parquet"
-    p.processed.mkdir(parents=True, exist_ok=True)
+    #p.processed.mkdir(parents=True, exist_ok=True)
 
     write_parquet(orders, out_orders)
     write_parquet(users, out_users)
@@ -47,5 +46,5 @@ def main() -> None:
     log.info("Run meta: %s", meta_path)
 
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()
