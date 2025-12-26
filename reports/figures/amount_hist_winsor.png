@@ -4,3 +4,32 @@ fig.update_xaxes(title_text="Amount (winsorized)")
 fig.update_yaxes(title_text="Number of orders")
 save_fig(fig, FIGS / "amount_hist_winsor.png")
 fig
+
+
+  def bootstrap_diff_means(a: pd.Series, b: pd.Series, *, n_boot: int = 2000, seed: int = 0) -> dict:
+ rng = np.random.default_rng(seed)
+ a = pd.to_numeric(a, errors="coerce").dropna().to_numpy()
+ b = pd.to_numeric(b, errors="coerce").dropna().to_numpy()
+ assert len(a) > 0 and len(b) > 0, "Empty group after cleaning"
+
+ diffs = []
+ for _ in range(n_boot):
+ sa = rng.choice(a, size=len(a), replace=True)
+ sb = rng.choice(b, size=len(b), replace=True)
+ diffs.append(sa.mean() - sb.mean())
+ diffs = np.array(diffs)
+
+ return {
+ "diff_mean": float(a.mean() - b.mean()),
+ "ci_low": float(np.quantile(diffs, 0.025)),
+ "ci_high": float(np.quantile(diffs, 0.975)),
+ }
+
+ d = df.assign(is_refund=df["status_clean"].eq("refund").astype(int))
+
+ a = d.loc[d["country"].eq("SA"), "is_refund"]
+ b = d.loc[d["country"].eq("AE"), "is_refund"]
+
+ print("n_SA:", len(a), "n_AE:", len(b))
+ res = bootstrap_diff_means(a, b, n_boot=2000, seed=0)
+print(res)
