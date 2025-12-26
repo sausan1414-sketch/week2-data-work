@@ -1,0 +1,17 @@
+rev = (
+    df.groupby("country", dropna=False)
+      .agg(
+         n=("order_id","size"),
+         revenue=("amount","sum"),
+         aov=("amount","mean"),
+       )
+      .reset_index()
+      .sort_values("revenue", ascending=False)
+ )
+
+fig = px.bar(rev, x="country", y="revenue", title="Revenue by country (all data)")
+fig.update_layout(title={"x": 0.02})
+fig.update_xaxes(title_text="Country")
+fig.update_yaxes(title_text="Revenue (sum of amount)")
+save_fig(fig, FIGS / "revenue_by_country.png")
+fig

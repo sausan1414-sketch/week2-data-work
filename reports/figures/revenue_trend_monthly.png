@@ -1,0 +1,13 @@
+trend = (
+     df.groupby("month", dropna=False)
+       .agg(n=("order_id","size"), revenue=("amount","sum"))
+       .reset_index()
+       .sort_values("month")
+ )
+
+fig = px.line(trend, x="month", y="revenue", title="Revenue over time (monthly)")
+fig.update_layout(title={"x": 0.02})
+fig.update_xaxes(title_text="Month")
+fig.update_yaxes(title_text="Revenue")
+save_fig(fig, FIGS / "revenue_trend_monthly.png")
+fig

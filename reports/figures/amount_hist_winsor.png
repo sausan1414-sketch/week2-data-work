@@ -1,0 +1,6 @@
+fig = px.histogram(df, x="amount_winsor", nbins=30, title="Order amount distribution (winsorized)")
+fig.update_layout(title={"x": 0.02})
+fig.update_xaxes(title_text="Amount (winsorized)")
+fig.update_yaxes(title_text="Number of orders")
+save_fig(fig, FIGS / "amount_hist_winsor.png")
+fig
