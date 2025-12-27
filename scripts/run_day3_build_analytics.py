@@ -14,6 +14,7 @@ from bootcamp_data.config import make_paths
 from bootcamp_data.quality import require_columns, assert_non_empty, assert_unique_key
 from bootcamp_data.transforms import parse_datetime, add_time_parts, winsorize, add_outlier_flag
 from bootcamp_data.joins import safe_left_join
+from bootcamp_data.etl import run_etl, make_etl_config
 
 
 def main() -> None:
