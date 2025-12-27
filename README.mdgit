@@ -1,1 +1,28 @@
-#week2-data-work
+# ETL Project — Orders & Users Analytics
+
+## Overview
+A reproducible ETL pipeline that transforms raw e-commerce orders and users CSV data into analysis-ready Parquet datasets for analytics and EDA.
+
+## Raw Data
+Input files located in `data/raw/`:
+- `orders.csv` — order-level data
+- `users.csv` — user attributes
+
+## ETL Pipeline
+- Reads raw CSVs and validates required columns.
+- Parses timestamps and derives time features.
+- Safely joins orders with users.
+- Flags outliers using IQR and applies winsorization (1%–99%).
+- Writes processed outputs and minimal run metadata.
+
+## Outputs
+Generated in `data/processed/`:
+- `orders_clean.parquet`
+- `users.parquet`
+- `analytics_table.parquet`
+- `_run_meta.json`
+
+## Run
+```bash
+python scripts/run_etl.py
+
